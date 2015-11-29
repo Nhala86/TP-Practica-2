@@ -1,17 +1,20 @@
 package comandos;
-
+import logica.Mundo;
 public class Ayuda extends Comando {
+	
+	public void ejecuta (Mundo mundo){
+		System.out.println(ParserComandos.AyudaComandos());
+	}
 
 	@Override
 	public Comando parsea(String cadenaComando) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String textoAyuda() {
-		// TODO Auto-generated method stub
-		return null;
+		return ("Ayuda: estás leyendo " + "\n");
 	}
 
 }
