@@ -68,16 +68,11 @@ public class Mundo{
 		for(int i = 0; i < this.getFilas(); i++){
     		for(int j = 0; j < this.getColumnas(); j++){
     			if (!superficie.casillaVacia(i, j) && !movido[i][j]){
-    				Casilla casilla = superficie.evoluciona(i, j);
-    				movido[casilla.getFila()][casilla.getColumna()]=true;
+    				Casilla casilla = this.superficie.ejecutaMovimiento(i, j);
+    				movido[casilla.getFila()][casilla.getColumna()] = true;
     			}
-    			
-    			
-    			
-    				
-					
-						
-    					
+    		}
+		}
 	}
 	
 	/**
@@ -187,6 +182,22 @@ public class Mundo{
 	 */
 	public int getColumnas(){
 		return this.superficie.getColumnas();
+	}
+	
+	/**
+	 * 
+	 * @param simulacion 
+	 */
+	public void esSimulacionTerminada(boolean simulacionTerminada){
+		SimulacionTerminada = simulacionTerminada;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean getSimulacionTerminada(){
+		return SimulacionTerminada;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package logica;
+tapackage logica;
 
 import celula.Celula;
 
@@ -96,8 +96,7 @@ public class Superficie{
 	 * @return posicion en el que se encuentra la casilla seleccionada aleatoriamente
 	 */
 	public Casilla ejecutaMovimiento(int f, int c){
-		return superficie[f][c].ejecutaMovimiento(f,c, this);
-		
+		return superficie[f][c].ejecutaMovimiento(f,c, this);	
 	}
 	
 	/**
