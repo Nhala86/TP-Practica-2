@@ -44,8 +44,7 @@ public class CrearCelulaCompleja  implements Comando{
 
 	@Override
 	public String textoAyuda() {
-		return ("CREARCELULACOMPLEJA F C: crea una nueva celula compleja en la posicion (f,c) si es posible") 
-				+ System.getProperty("line.separator");
+		return ("CREARCELULACOMPLEJA F C: crea una nueva celula compleja en la posicion (f,c) si es posible" + System.getProperty("line.separator"));
 	}
 
 }

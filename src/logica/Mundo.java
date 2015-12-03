@@ -173,13 +173,16 @@ public class Mundo{
 		return this.superficie.getColumnas();
 	}
 	
-	
+	public void esSimulacionTerminada(boolean simulacionTerminada){  
+		this.simulacionTerminada = simulacionTerminada;  
+	}
+
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public boolean esSimulacionTerminada(){
+	public boolean getSimulacionTerminada(){
 		return simulacionTerminada;
 	}
 	

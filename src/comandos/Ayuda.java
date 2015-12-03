@@ -18,7 +18,7 @@ public class Ayuda implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("Ayuda: POSIBLES COMANDOS: ") + System.getProperty("line.separator");
+		return ("Ayuda: POSIBLES COMANDOS: " + System.getProperty("line.separator"));
 	}
 
 }

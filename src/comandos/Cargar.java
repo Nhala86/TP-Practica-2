@@ -8,8 +8,7 @@ public class Cargar implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("CARGAR: cargar de un fichero de texto una partida guardada") + 
-				System.getProperty("line.separator");
+		return ("CARGAR: cargar de un fichero de texto una partida guardada" + System.getProperty("line.separator"));
 	}
 
 	@Override

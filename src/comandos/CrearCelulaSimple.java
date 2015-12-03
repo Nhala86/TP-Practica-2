@@ -42,8 +42,7 @@ public class CrearCelulaSimple implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("CREARCELULASIMPLE F C: crea una nueva celula simple en la posicion (f,c) si es posible")
-				+ System.getProperty("line.separator");
+		return ("CREARCELULASIMPLE F C: crea una nueva celula simple en la posicion (f,c) si es posible" + System.getProperty("line.separator"));
 	}
 	
 }

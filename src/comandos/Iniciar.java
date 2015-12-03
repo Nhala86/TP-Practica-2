@@ -17,7 +17,7 @@ public class Iniciar implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return "INICIAR : Inicia las celulas aleatoriamente" + System.getProperty("line.separator"); 
+		return ("INICIAR : Inicia las celulas aleatoriamente" + System.getProperty("line.separator")); 
 	}
 
 }

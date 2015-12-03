@@ -26,8 +26,7 @@ public class EliminarCelula implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("ELIMINARCELULA (F, C): Elimina la celula de la posicion (f, c)")
-				+ System.getProperty("line.separator");
+		return ("ELIMINARCELULA (F, C): Elimina la celula de la posicion (f, c)" + System.getProperty("line.separator"));
 	}
 	
 	public void ejecuta(Mundo mundo){

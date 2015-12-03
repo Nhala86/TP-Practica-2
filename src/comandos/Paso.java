@@ -15,7 +15,7 @@ public class Paso implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("PASO: mueve las celulas de lugar en el mundo") + System.getProperty("line.separator");
+		return ("PASO: mueve las celulas de lugar en el mundo" + System.getProperty("line.separator"));
 	}
 	
 	public void ejecuta(Mundo mundo){

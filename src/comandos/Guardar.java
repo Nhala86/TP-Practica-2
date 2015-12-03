@@ -8,8 +8,7 @@ public class Guardar implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("GUARDAR: guarda en un fichero de texto una partida") + 
-				System.getProperty("line.separator");
+		return ("GUARDAR: guarda en un fichero de texto una partida" + System.getProperty("line.separator"));
 	}
 
 	@Override

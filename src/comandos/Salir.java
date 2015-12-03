@@ -20,14 +20,14 @@ public class Salir implements Comando {
 	 */
 	@Override
 	public String textoAyuda() {
-		return ("SALIR: Es una instruccion que nos saca de la simulación") + System.getProperty("line.separator");
+		return ("SALIR: Es una instruccion que nos saca de la simulación" + System.getProperty("line.separator"));
 	}
  /**
   * 
   */
 	@Override
 	public void ejecuta(Mundo mundo) {	
-		mundo.terminaSimulacion();
+		mundo.esSimulacionTerminada(true);
 	}
 
 }

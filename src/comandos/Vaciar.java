@@ -14,7 +14,7 @@ public class Vaciar implements Comando {
 
 	@Override
 	public String textoAyuda() {		
-		return ("VACIAR: Elimina las celulas del mundo") + System.getProperty("line.separator");
+		return ("VACIAR: Elimina las celulas del mundo" + System.getProperty("line.separator"));
 	}
 	
 	public void ejecuta(Mundo mundo){
