@@ -1,4 +1,4 @@
-tapackage logica;
+package logica;
 
 import celula.Celula;
 
@@ -183,10 +183,11 @@ public class Superficie{
 	 * @param c entero positivo que hace referencia a la columna
 	 * @return el valor decrementado de pasos sin mover
 	 */
+	/*
 	public int decrementarSinMover(int f, int c) {
 		return superficie[f][c].decrementarSinMover();		
 	}
-	
+	*/
 	/**
 	 * Metodo que llama a la clase Superficie con unos parametros especificos de fila 
 	 * y columna para indicar los pasos de reproduccion de la celula

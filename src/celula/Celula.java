@@ -6,10 +6,9 @@ import logica.Superficie;
 abstract public class Celula {
 	
 	private static final int MAX_PASOS_SIN_MOVER = 1;
-	private static final int PASOS_REPRODUCCION = 2;
+	protected static final int PASOS_REPRODUCCION = 2;
 	protected int pasosSinMover;
 	protected int pasosReproduccion;
-	protected boolean esComestible;
 
 	/**
 	 * Metodo constructor generico de la clase Celula definido para las celulas basicas del juego

@@ -69,7 +69,16 @@ public class Mundo{
     		for(int j = 0; j < this.getColumnas(); j++){
     			if (!superficie.casillaVacia(i, j) && !movido[i][j]){
     				Casilla casilla = this.superficie.ejecutaMovimiento(i, j);
-    				movido[casilla.getFila()][casilla.getColumna()] = true;
+    				//Llevar a superficie
+    				//celula simple
+    				if (){
+	    				superficie.moverCelula (casilla.getFila(), casilla.getColumna(), i, j);
+	    				System.out.println("Movimiento de (" + i + "," + j + ") a (" + f + "," + c + ")");
+    				}
+    				//celula compleja
+    				else {
+    					movido[casilla.getFila()][casilla.getColumna()] = true;
+    				}
     			}
     		}
 		}
