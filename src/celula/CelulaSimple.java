@@ -6,11 +6,11 @@ import logica.Superficie;
 public class CelulaSimple extends Celula {
 
 	public CelulaSimple(){
-		this.esComestible = true;
+		super();
 	}
 	public CelulaSimple(int SinMover, int Reproduccion){
 		super(SinMover,Reproduccion);
-		this.esComestible = true;
+		
 	}
 	
 	@Override
@@ -37,6 +37,18 @@ public class CelulaSimple extends Celula {
 		//Indica que no hay casillas vacias
 		if (cont == 0){
 			return null;
+		}
+		//Si se mueve la celula, entonces decrementamos sus contadores
+		else {
+			this.pasosSinMover--;
+			
+			if (this.pasosReproduccion < 0){
+			
+			this.pasosReproduccion = PASOS_REPRODUCCION;
+			this.crearCelulaSuperficie(i,j);
+			System.out.println("Nace nueva celula en (" + i + "," + j + ")" + " cuyo padre ha sido (" + f + "," + c + ")");
+		}
+			
 		}
 		return casilla[(int) (Math.random() * cont)]; 
 	}

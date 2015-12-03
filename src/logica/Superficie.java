@@ -40,23 +40,6 @@ public class Superficie{
 		}
 		return matriz;
 	}
-	/*
-	public String toString(){
-		String matriz = "";
-		for(int i = 0; i < this.filas; i++){
-    		for(int j = 0; j < this.columnas; j++){
-    			matriz += ' '; 
-    			if(!casillaVacia(i, j)){    				
-    				matriz += superficie[i][j].toString();    				
-    			}
-    			else
-    				matriz += " - ";
-		    }
-    		matriz = matriz + System.getProperty("line.separator");
-		}
-		return matriz;
-	}
-	*/
 	
 	public Casilla evoluciona(int f, int c){
 		Casilla casilla= this.ejecutaMovimiento(f, c);

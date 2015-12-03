@@ -1,7 +1,7 @@
 package comandos;
 import logica.Mundo;
 
-public class Iniciar extends Comando {
+public class Iniciar implements Comando {
 	
 	public void ejecuta(Mundo mundo){
 		mundo.generarCelulas();
@@ -9,7 +9,7 @@ public class Iniciar extends Comando {
 
 	@Override
 	public Comando parsea(String[] palabras) {
-		if((palabras.length == 1) && (palabras[0].equals("INICIAR"))){
+		if((palabras.length == 1) && (palabras[0].equals("iniciar"))){
 			return new Iniciar();
 		}
 		else return null;

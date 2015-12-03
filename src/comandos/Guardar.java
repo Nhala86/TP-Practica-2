@@ -1,17 +1,34 @@
 package comandos;
 
-public class Guardar extends Comando {
+import java.io.IOException;
 
-	@Override
-	public Comando parsea(String cadenaComando) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+import logica.Mundo;
+
+public class Guardar implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		// TODO Auto-generated method stub
-		return null;
+		return ("GUARDAR: guarda en un fichero de texto una partida" + '\n');
+	}
+
+	@Override
+	public void ejecuta(Mundo mundo){
+		try {
+			mundo.guardar();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public Comando parsea(String[] palabras) {
+		Comando comando;
+		if(palabras[0].equals("guardar")&& (palabras.length == 1))
+			comando = new Cargar();
+		else comando = null;	
+		return comando;	
 	}
 
 }

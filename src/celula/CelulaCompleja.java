@@ -6,11 +6,10 @@ import logica.Superficie;
 public class CelulaCompleja extends Celula {
 
 	public CelulaCompleja(){
-		this.esComestible = false;
+		super();
 	}
 	public CelulaCompleja(int SinMover, int Reproduccion){
 		super(SinMover,Reproduccion);
-		this.esComestible = false;
 	}
 	
 	@Override
@@ -38,6 +37,7 @@ public class CelulaCompleja extends Celula {
 		if (cont == 0){
 			return null;
 		}
+		
 		return casilla[(int) (Math.random() * cont)];
 	}
 
@@ -48,15 +48,8 @@ public class CelulaCompleja extends Celula {
 	
 	@Override
 	public void evoluciona(int f, int c) {
-		this.pasosSinMover--;
-		if (this.pasosReproduccion < 0){
-			System.out.println("Movimiento de (" + i + "," + j + ") a (" + f + "," + c + ")");
-			this.pasosReproduccion = PASOS_REPRODUCCION;
-			superficie.moverCelula (f, c, i, j);
-			this.crearCelulaSuperficie(i,j);
-			System.out.println("Nace nueva celula en (" + i + "," + j + ")" + " cuyo padre ha sido (" + f + "," + c + ")");
-			hecho = true;
-		}
+		
+		
 		
 		
 	}

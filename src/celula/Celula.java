@@ -9,6 +9,7 @@ abstract public class Celula {
 	protected static final int PASOS_REPRODUCCION = 2;
 	protected int pasosSinMover;
 	protected int pasosReproduccion;
+	
 
 	/**
 	 * Metodo constructor generico de la clase Celula definido para las celulas basicas del juego

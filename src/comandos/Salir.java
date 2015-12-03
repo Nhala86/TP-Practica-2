@@ -1,7 +1,7 @@
 package comandos;
 import logica.Mundo;
 
-public class Salir extends Comando {
+public class Salir implements Comando {
 
 	/**
 	 * 
@@ -27,7 +27,7 @@ public class Salir extends Comando {
   */
 	@Override
 	public void ejecuta(Mundo mundo) {
-		mundo.esSimulacionTerminada(false);		
+		mundo.esSimulacionTerminada(true);		
 	}
 
 }

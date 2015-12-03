@@ -1,7 +1,7 @@
 package comandos;
 import logica.Mundo;
 
-public class Vaciar extends Comando {
+public class Vaciar implements Comando {
 
 	@Override
 	public Comando parsea(String[] palabras) {
