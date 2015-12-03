@@ -9,6 +9,7 @@ abstract public class Celula {
 	private static final int PASOS_REPRODUCCION = 2;
 	protected int pasosSinMover;
 	protected int pasosReproduccion;
+	
 	protected boolean esComestible;
 
 	/**

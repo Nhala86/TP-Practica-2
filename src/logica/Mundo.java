@@ -1,15 +1,20 @@
 package logica;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.StringBuffer;
+import java.util.Scanner;
 
 import celula.Celula;
+import celula.CelulaSimple;
 
 public class Mundo{
 	
 	private static final int NUMEROCELULAS = 6;
 	private static final int NUMEROFILAS = 12;
 	private static final int NUMEROCOLUMNAS = 14;
-	private boolean simulacionTerminada;
+	private boolean simulacionTerminada = false;
 	private Superficie superficie;
 
 		
@@ -41,7 +46,7 @@ public class Mundo{
 			int f = (int) (Math.random()* getFilas());
 			int c = (int) (Math.random()* getColumnas());
 			if (this.superficie.casillaVacia(f, c)) {
-				this.superficie.llenarCasilla(f, c,new Celula());
+				this.superficie.llenarCasilla(f, c,new CelulaSimple());
 				contCelulas++;
 			}
 		}
@@ -143,8 +148,8 @@ public class Mundo{
 	 * @param c Valor entero positivo columna de la matriz
 	 * @return TRUE se ha hecho el proceso de crear la celula
 	 */
-	public boolean crearCelulaSuperficie(int f, int c){ 
-		return superficie.llenarCasilla(f, c,new Celula());  
+	public boolean crearCelulaSuperficie(int f, int c, Celula celula){ 
+		return superficie.llenarCasilla(f, c,celula);  
 	}
 	
 	/**
@@ -155,7 +160,7 @@ public class Mundo{
 	* @param Reproduccion Numero de pasos que le quedan a la celula para reproducirse
 	*/
 	public void crearCelulaSuperficie(int f, int c, int SinMover, int Reproduccion){ 
-		superficie.llenarCasilla(f, c, new Celula(SinMover, Reproduccion));  
+		//superficie.llenarCasilla(f, c, new Celula(SinMover, Reproduccion));  
 	}
 	
 	/**
@@ -189,7 +194,7 @@ public class Mundo{
 	 * @param simulacion 
 	 */
 	public void esSimulacionTerminada(boolean simulacionTerminada){
-		SimulacionTerminada = simulacionTerminada;
+		this.simulacionTerminada = simulacionTerminada;
 	}
 	
 	/**
@@ -197,8 +202,46 @@ public class Mundo{
 	 * @return
 	 */
 	public boolean getSimulacionTerminada(){
-		return SimulacionTerminada;
+		return simulacionTerminada;
 	}
 	
+	/**
+	 * Se encarga de guardar las dimensiones del tablero y luego todo el tablero con el estado actual del juego en juego.txt
+	 * @throws IOException
+	 */
+	public void guardar() throws IOException{
+		File archivo=new File("juego.txt");
+		FileWriter escribir = new FileWriter(archivo);
+		String dim = this.getFilas() + " " + this.getColumnas() + System.getProperty("line.separator");
+		escribir.append(dim);
+		escribir.append(this.toStringBuffer());
+		escribir.close();
+	}
+	
+	/**
+	 * Abre el fichero juego.txt, carga las dimensiones del tablero del fichero y las celulas que habia en un nuevo mundo
+	 * @return El nuevo mundo que hemos cargado del fichero
+	 * @throws IOException
+	 */
+	public Mundo cargar() throws IOException{
+		File archivo=new File("juego.txt");
+		Scanner entrada = new Scanner(archivo);
+		int fila = entrada.nextInt(), columna = entrada.nextInt();
+		Mundo mundo = new Mundo(fila, columna);
+		for (int i=0; i < fila; i++){
+			for (int j=0; j < columna; j++){
+				String cadena = entrada.next();
+				if (!cadena.equals("-")){
+					//Crear nueva celula
+					String [] posicion = cadena.split("-");
+					int SinMover = Integer.parseInt(posicion[0]);
+					int Reproduccion = Integer.parseInt(posicion[1]);
+					mundo.crearCelulaSuperficie(i, j, SinMover, Reproduccion);
+				}
+			}
+		}
+		entrada.close();
+		return mundo;
+	}
 }
 

@@ -5,9 +5,9 @@ public final class ParserComandos {
 	private static final Comando[] comandos = {
 			new Ayuda(),
 			new Iniciar(),
-			new CrearCelulaSimple(),
-			new CrearCelulaCompleja(),
-			new EliminarCelula(), 
+			new CrearCelulaSimple(0,0),
+			new CrearCelulaCompleja(0,0),
+			new EliminarCelula(0,0), 
 			new Paso(), 
 			new Vaciar(),
 			new Salir(),
