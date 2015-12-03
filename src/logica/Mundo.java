@@ -5,15 +5,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.StringBuffer;
 import java.util.Scanner;
-
 import celula.Celula;
+import celula.CelulaCompleja;
 import celula.CelulaSimple;
 
 public class Mundo{
 	
-	private static final int NUMEROCELULAS = 6;
-	private static final int NUMEROFILAS = 12;
-	private static final int NUMEROCOLUMNAS = 14;
+	private static final int NUMEROCELULASSIMPLES = 4;
+	private static final int NUMEROCELULASCOMPLEJAS = 2;
+	private static final int NUMEROFILAS = 3;
+	private static final int NUMEROCOLUMNAS = 4;
 	private boolean simulacionTerminada = false;
 	private Superficie superficie;
 
@@ -42,11 +43,20 @@ public class Mundo{
 	 */
 	public void generarCelulas(){
 		int contCelulas = 0;
-		while (contCelulas < NUMEROCELULAS){
+		while (contCelulas < NUMEROCELULASSIMPLES){
 			int f = (int) (Math.random()* getFilas());
 			int c = (int) (Math.random()* getColumnas());
 			if (this.superficie.casillaVacia(f, c)) {
-				this.superficie.llenarCasilla(f, c,new CelulaSimple());
+				this.superficie.llenarCasilla(f, c, new CelulaSimple());
+				contCelulas++;
+			}
+		}
+		contCelulas = 0;
+		while (contCelulas < NUMEROCELULASCOMPLEJAS){
+			int f = (int) (Math.random()* getFilas());
+			int c = (int) (Math.random()* getColumnas());
+			if (this.superficie.casillaVacia(f, c)) {
+				this.superficie.llenarCasilla(f, c, new CelulaCompleja());
 				contCelulas++;
 			}
 		}
@@ -74,16 +84,7 @@ public class Mundo{
     		for(int j = 0; j < this.getColumnas(); j++){
     			if (!superficie.casillaVacia(i, j) && !movido[i][j]){
     				Casilla casilla = this.superficie.ejecutaMovimiento(i, j);
-    				//Llevar a superficie
-    				//celula simple
-    				if (){
-	    				superficie.moverCelula (casilla.getFila(), casilla.getColumna(), i, j);
-	    				System.out.println("Movimiento de (" + i + "," + j + ") a (" + f + "," + c + ")");
-    				}
-    				//celula compleja
-    				else {
-    					movido[casilla.getFila()][casilla.getColumna()] = true;
-    				}
+    				movido[casilla.getFila()][casilla.getColumna()] = true;
     			}
     		}
 		}
@@ -126,22 +127,6 @@ public class Mundo{
 		return hecho;
 	}
 	*/
-	/**
-	 * Elimina la celula si cumple la condicion de que SinMovimientos sea menor que 0, dejando su casilla libre
-	 * @param f Entero que contiene la fila de la celula
-	 * @param c Entero que contiene la columna de la celula
-	 * @return TRUE Si se han cumplido las condiciones y se elimina la celula, FALSE si no se cumplen
-	 */
-	private boolean morir(int f, int c){
-		boolean hecho = false;
-		if (superficie.getSinMover(f, c) == 0){
-			superficie.vaciarCasilla(f, c);
-			System.out.println("Muere la celula de la casilla (" + f + "," + c + ") por inactividad");
-			hecho = true;
-		}
-		return hecho;
-	}
-	
 	
 
 	/**
@@ -155,21 +140,11 @@ public class Mundo{
 	 * Crea una celula en la posicion (f,c) de la superficie
 	 * @param f Valor entero positivo fila de la matriz
 	 * @param c Valor entero positivo columna de la matriz
+	 * @param celula 
 	 * @return TRUE se ha hecho el proceso de crear la celula
 	 */
 	public boolean crearCelulaSuperficie(int f, int c, Celula celula){ 
-		return superficie.llenarCasilla(f, c,celula);  
-	}
-	
-	/**
-	* Crea una celula en la posicion (f,c) de la superficie con los paramatros SinMover y Reproduccion
-	* @param f valor entero positivo acotado en un rango valido del numero de filas
-	* @param c valor entero positivo acotado en un rango valido del numero de columnas
-	* @param SinMover Numero de pasos que puede pasar la celula sin moverse
-	* @param Reproduccion Numero de pasos que le quedan a la celula para reproducirse
-	*/
-	public void crearCelulaSuperficie(int f, int c, int SinMover, int Reproduccion){ 
-		//superficie.llenarCasilla(f, c, new Celula(SinMover, Reproduccion));  
+		return superficie.llenarCasilla(f, c, celula);  
 	}
 	
 	/**
@@ -198,19 +173,13 @@ public class Mundo{
 		return this.superficie.getColumnas();
 	}
 	
-	/**
-	 * 
-	 * @param simulacion 
-	 */
-	public void esSimulacionTerminada(boolean simulacionTerminada){
-		this.simulacionTerminada = simulacionTerminada;
-	}
+	
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public boolean getSimulacionTerminada(){
+	public boolean esSimulacionTerminada(){
 		return simulacionTerminada;
 	}
 	
@@ -245,12 +214,36 @@ public class Mundo{
 					String [] posicion = cadena.split("-");
 					int SinMover = Integer.parseInt(posicion[0]);
 					int Reproduccion = Integer.parseInt(posicion[1]);
-					mundo.crearCelulaSuperficie(i, j, SinMover, Reproduccion);
+					//MIRAR QUE TIPO DE CELULA CREO
+					mundo.crearCelulaSuperficie(i, j, new CelulaSimple (SinMover, Reproduccion));
 				}
 			}
 		}
 		entrada.close();
 		return mundo;
 	}
+	
+	/**
+	 * Metodo que valida que los valores de fila y columna que pasa el usuario son validos
+	 * @param f valores enteros positivos de fila
+	 * @param c valores enteros positivos de columna
+	 * @return TRUE si los valores de fila y columna es valido
+	 * FALSE si los valores de fila y columna no son correctos, no estan dentro de los parametros definidos
+	 */
+	public boolean validarDatos(int f, int c){
+		boolean valido = false;
+		if(f >= 0 && f < getFilas()){
+			if(c >= 0 && c < getColumnas()){
+				valido = true;
+			}
+		}
+		return valido;
+	}
+	
+	public void terminaSimulacion() {
+		this.simulacionTerminada = true;
+	}
+	
+	
 }
 

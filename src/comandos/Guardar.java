@@ -8,7 +8,8 @@ public class Guardar implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("GUARDAR: guarda en un fichero de texto una partida" + '\n');
+		return ("GUARDAR: guarda en un fichero de texto una partida") + 
+				System.getProperty("line.separator");
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class Guardar implements Comando {
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;
-		if(palabras[0].equals("guardar")&& (palabras.length == 1))
+		if(palabras[0].equalsIgnoreCase("guardar")&& (palabras.length == 1))
 			comando = new Cargar();
 		else comando = null;	
 		return comando;	

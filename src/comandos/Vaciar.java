@@ -6,7 +6,7 @@ public class Vaciar implements Comando {
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;
-		if((palabras.length == 1)&& (palabras[0].equals("vaciar")))
+		if((palabras.length == 1)&& (palabras[0].equalsIgnoreCase("vaciar")))
 			comando = new Vaciar();
 		else comando = null;
 		return comando;
@@ -14,7 +14,7 @@ public class Vaciar implements Comando {
 
 	@Override
 	public String textoAyuda() {		
-		return ("VACIAR: Elimina las celulas del mundo" + '\n');
+		return ("VACIAR: Elimina las celulas del mundo") + System.getProperty("line.separator");
 	}
 	
 	public void ejecuta(Mundo mundo){

@@ -9,7 +9,7 @@ public class Salir implements Comando {
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;
-		if(palabras[0].equals("salir") && (palabras.length == 1))
+		if(palabras[0].equalsIgnoreCase("salir") && (palabras.length == 1))
 			return comando = new Salir();
 		else comando = null;
 		return comando;
@@ -20,14 +20,14 @@ public class Salir implements Comando {
 	 */
 	@Override
 	public String textoAyuda() {
-		return ("SALIR: Es una instruccion que nos saca de la simulación" + '\n');
+		return ("SALIR: Es una instruccion que nos saca de la simulación") + System.getProperty("line.separator");
 	}
  /**
   * 
   */
 	@Override
-	public void ejecuta(Mundo mundo) {
-		mundo.esSimulacionTerminada(true);		
+	public void ejecuta(Mundo mundo) {	
+		mundo.terminaSimulacion();
 	}
 
 }

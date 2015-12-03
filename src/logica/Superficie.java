@@ -40,36 +40,7 @@ public class Superficie{
 		}
 		return matriz;
 	}
-	
-	public Casilla evoluciona(int f, int c){
-		Casilla casilla= this.ejecutaMovimiento(f, c);
-		if (casilla != null){ //Se puede mover (TIENE SITIO LIBRE)
-			int i = casilla.getFila();
-			int j = casilla.getColumna();
-			this.superficie[f][c].evoluciona(i,j);
 		
-			//this.decrementarRep(f, c);
-			
-			System.out.println("Movimiento de (" + i + "," + j + ") a (" + f + "," + c + ")");
-			this.moverCelula (f, c, i, j);
-			
-			//Nueva posicion a la que se mueve la celula
-			
-		}
-		else {
-			//Si no se puede mover y esta por reproducirse, la celula muere
-			if (this.getReproducir(f, c) < 0){
-				this.vaciarCasilla(f, c);
-				System.out.println("Muere la celula de la casilla (" + i + "," + j + ") por no poder reproducirse");
-			}
-			else {
-				this.decrementarSinMover(f, c);
-			}
-		}	
-		return casilla;
-	}
-
-	
 	
 	/**
 	 * Busco las posiciones vacias que hay alrededor de la celula, las guarda en un array de tipo casilla y elijo aleatoriamente

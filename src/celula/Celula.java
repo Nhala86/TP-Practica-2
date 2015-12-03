@@ -34,18 +34,13 @@ abstract public class Celula {
 	
 	public abstract Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
 	public abstract boolean esComestible();
+	public abstract Object toStringBuffer();
 	/**
 	 * Mueva la celula a la nueva Posicion
 	 * @param f Fila	
 	 * @param c Columna
 	 */
-	public abstract void evoluciona(int f, int c);
-	/*
-    public String toString(){
-       return this.pasosSinMover + "-" + this.pasosReproduccion;
-    }
-    */
-	
+
 	
     /**
      * Metodo que decrementa el numero de pasos de reproduccion que tiene la celula
@@ -55,15 +50,7 @@ abstract public class Celula {
     	return this.pasosReproduccion--;
     }
     
-    /**
-     * Metodo que decrementa el numero de pasos sin mover que tiene la celula
-     * @return valor entero entre 0 y 1
-     */
-    /*
-	public int decrementarSinMover(){
-		return this.pasosSinMover--;
-	}
-	*/
+   
 	/**
 	 * Metodo que devuelve los pasos de reproduccion de la celula
 	 * @return valor entero positivo que indica los pasos de reproduccion de la celula
@@ -80,19 +67,5 @@ abstract public class Celula {
 		return this.pasosSinMover;
 	}
 	
-	/**
-	 * Reinicia el valor de pasosReproduccion a la constante
-	 */
-	/*
-	public void reiniciarReproducir(){
-		this.pasosReproduccion = PASOS_REPRODUCCION;
-	}
-	*/
-	/**
-     * Coge los valores numericos de pasosSinMover y pasosReproduccion y los convierte en una cadena para mostrar
-     * @return una cadena con los dos parametros numericos de la celula, separados por un guion
-     */
-	public Object toStringBuffer() {
-		return this.pasosSinMover + "-" + this.pasosReproduccion;
-	}
+	
 }

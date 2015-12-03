@@ -6,6 +6,7 @@ import logica.Superficie;
 public class CelulaCompleja extends Celula {
 	private static final int MAX_COMER = 3;
 	private int explota;
+	
 	public CelulaCompleja(){
 		super();
 		explota = MAX_COMER;
@@ -42,18 +43,19 @@ public class CelulaCompleja extends Celula {
 		}
 		return casilla;
 	}
+	
+	/**
+     * Coge los valores numericos de pasosSinMover y pasosReproduccion y los convierte en una cadena para mostrar
+     * @return una cadena con los dos parametros numericos de la celula, separados por un guion
+     */
+	public Object toStringBuffer() {
+		return (" " + this.explota + " ");
+	}
 
 	@Override
 	public boolean esComestible() {
 		return false;
 	}
 	
-	@Override
-	public void evoluciona(int f, int c) {
-		
-		
-		
-		
-	}
 
 }

@@ -10,7 +10,7 @@ public class Ayuda implements Comando {
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;
-		if(palabras[0].equals("ayuda")&& (palabras.length == 1))
+		if(palabras[0].equalsIgnoreCase("ayuda") && (palabras.length == 1))
 			comando = new Ayuda();
 		else comando = null;	
 		return comando;
@@ -18,7 +18,7 @@ public class Ayuda implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("Ayuda: estás leyendo " + "\n");
+		return ("Ayuda: POSIBLES COMANDOS: ") + System.getProperty("line.separator");
 	}
 
 }

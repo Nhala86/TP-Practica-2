@@ -6,6 +6,8 @@ public class EliminarCelula implements Comando {
 	private int fila;
 	private int columna;
 	
+	
+	
 	public EliminarCelula(int fila, int columna){
 		this.fila = fila;
 		this.columna = columna;
@@ -13,7 +15,7 @@ public class EliminarCelula implements Comando {
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;
-		if(palabras[0].equals("eliminarcelula") && (palabras.length == 3)){
+		if(palabras[0].equalsIgnoreCase("eliminarcelula") && (palabras.length == 3)){
 			int f = Integer.parseInt(palabras[1]);
 			int c = Integer.parseInt(palabras[2]);
 			comando = new EliminarCelula(f, c);
@@ -24,7 +26,8 @@ public class EliminarCelula implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("ELIMINARCELULA (F, C): Elimina la celula de la posicion (f, c)" + '\n');
+		return ("ELIMINARCELULA (F, C): Elimina la celula de la posicion (f, c)")
+				+ System.getProperty("line.separator");
 	}
 	
 	public void ejecuta(Mundo mundo){

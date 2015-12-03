@@ -9,7 +9,7 @@ public class Iniciar implements Comando {
 
 	@Override
 	public Comando parsea(String[] palabras) {
-		if((palabras.length == 1) && (palabras[0].equals("iniciar"))){
+		if((palabras.length == 1) && (palabras[0].equalsIgnoreCase("iniciar"))){
 			return new Iniciar();
 		}
 		else return null;
@@ -17,7 +17,7 @@ public class Iniciar implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return "INICIAR:Inicia las celulas aleatoriamente"; 
+		return "INICIAR : Inicia las celulas aleatoriamente" + System.getProperty("line.separator"); 
 	}
 
 }
