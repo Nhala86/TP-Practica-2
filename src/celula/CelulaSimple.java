@@ -18,6 +18,7 @@ public class CelulaSimple extends Celula {
 		int cont = 0;
 		int [] fila = {-1, 0, 1};
 		Casilla[] casilla = new Casilla[8];
+		Casilla casillaMovimiento;
 		for(int i = 0; i < 3; i++){
 			for(int j = 0; j < 3; j++){
 				int nf = f + fila[i];
@@ -34,23 +35,32 @@ public class CelulaSimple extends Celula {
 				}	
 		 	}
 		}
-		//Indica que no hay casillas vacias
+		//Indica que no hay casillas vacias, por lo que no se puede mover
 		if (cont == 0){
-			return null;
+			casillaMovimiento = null;
+			//Si no se puede mover y esta por reproducirse, la celula muere
+			if (this.pasosReproduccion < 0){
+				superficie.vaciarCasilla(f, c);
+				System.out.println("Muere la celula de la casilla (" + f + "," + c + ") por no poder reproducirse");
+			}
+			else {
+				this.pasosSinMover--;
+			}
 		}
 		//Si se mueve la celula, entonces decrementamos sus contadores
 		else {
-			this.pasosSinMover--;
-			
+			casillaMovimiento = casilla[(int) (Math.random() * cont)];
+			int k = casillaMovimiento.getFila(), l = casillaMovimiento.getColumna();
+			this.pasosReproduccion--;
+			System.out.println("Movimiento de (" + f + "," + c + ") a (" + k + "," + l + ")");
 			if (this.pasosReproduccion < 0){
-			
-			this.pasosReproduccion = PASOS_REPRODUCCION;
-			this.crearCelulaSuperficie(i,j);
-			System.out.println("Nace nueva celula en (" + i + "," + j + ")" + " cuyo padre ha sido (" + f + "," + c + ")");
+				this.pasosReproduccion = PASOS_REPRODUCCION;
+				superficie.moverCelula(k, l, f, c);
+				new CelulaSimple(f,c);
+				System.out.println("Nace nueva celula en (" + f + "," + c + ")" + " cuyo padre ha sido (" + k + "," + l + ")");
+			}
 		}
-			
-		}
-		return casilla[(int) (Math.random() * cont)]; 
+		return casillaMovimiento;
 	}
 		
 

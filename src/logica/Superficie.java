@@ -79,7 +79,8 @@ public class Superficie{
 	 * @return posicion en el que se encuentra la casilla seleccionada aleatoriamente
 	 */
 	public Casilla ejecutaMovimiento(int f, int c){
-		return superficie[f][c].ejecutaMovimiento(f,c, this);	
+		return superficie[f][c].ejecutaMovimiento(f,c, this);
+		
 	}
 	
 	/**
@@ -203,6 +204,15 @@ public class Superficie{
 		this.superficie[f][c] = this.superficie[i][j];
 		this.superficie[i][j] = null;
 		
+	}
+	/**
+	 * 
+	 * @param i entero positivo que hace referencia a la fila nueva 
+	 * @param j entero positivo que hace referencia a la columna nueva
+	 * @return Si es comestible la celula
+	 */
+	public boolean esComestible(int i, int j) {
+		return superficie[i][j].esComestible();
 	}
 	
 	/**
