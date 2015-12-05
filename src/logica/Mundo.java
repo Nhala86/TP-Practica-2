@@ -154,11 +154,12 @@ public class Mundo{
 		return this.superficie.getColumnas();
 	}
 	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public boolean esSimulacionTerminada(){
+	public boolean getSimulacionTerminada(){
 		return simulacionTerminada;
 	}
 	

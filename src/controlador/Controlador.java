@@ -73,18 +73,24 @@ public class Controlador {
      * y encargado de llamar a las funciones en otras clases para mostrar por pantalla el juego y sus movimientos
      * @throws IOException 
      */
+
 	public void realizaSimulacion() throws IOException{
 		System.out.println("Bienvenido al juego de la vida: ");      
-		while (!mundo.esSimulacionTerminada()){
+		while (!mundo.getSimulacionTerminada()){
 			String [] palabras = crearComando(this.in);			
 			Comando comando = ParserComandos.parseaComando(palabras);
+
 			if (comando != null){
 				comando.ejecuta(this.mundo, this.in);
 			}
 			else {
-				System.out.println("El comando introducido no es valido, introduzca otro");
+				System.out.println("Comando desconocido (Escriba AYUDA para infomarse de los comandos disponibles)");
 			}
 		}		
+
+		
+			
+
 	}
 
 

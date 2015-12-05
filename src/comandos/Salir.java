@@ -28,8 +28,10 @@ public class Salir implements Comando {
   * 
   */
 	@Override
+
 	public void ejecuta(Mundo mundo, Scanner in){
 		mundo.terminaSimulacion();
+
 	}
 
 }
