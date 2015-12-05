@@ -1,4 +1,6 @@
 package comandos;
+import java.util.Scanner;
+
 import logica.Mundo;
 
 public class Salir implements Comando {
@@ -20,13 +22,13 @@ public class Salir implements Comando {
 	 */
 	@Override
 	public String textoAyuda() {
-		return ("SALIR: Es una instruccion que nos saca de la simulación") + System.getProperty("line.separator");
+		return ("SALIR: Es una instruccion que nos saca de la simulación" + System.getProperty("line.separator"));
 	}
  /**
   * 
   */
 	@Override
-	public void ejecuta(Mundo mundo) {	
+	public void ejecuta(Mundo mundo, Scanner in){
 		mundo.terminaSimulacion();
 	}
 

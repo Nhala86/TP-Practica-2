@@ -5,16 +5,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.StringBuffer;
 import java.util.Scanner;
+
 import celula.Celula;
 import celula.CelulaCompleja;
 import celula.CelulaSimple;
 
 public class Mundo{
 	
-	private static final int NUMEROCELULASSIMPLES = 4;
-	private static final int NUMEROCELULASCOMPLEJAS = 2;
-	private static final int NUMEROFILAS = 3;
-	private static final int NUMEROCOLUMNAS = 4;
+	private static final int NUMEROCELULASSIMPLES = 50;
+	private static final int NUMEROCELULASCOMPLEJAS = 15;
+	private static final int NUMEROFILAS = 10;
+	private static final int NUMEROCOLUMNAS = 10;
 	private boolean simulacionTerminada = false;
 	private Superficie superficie;
 
@@ -84,7 +85,10 @@ public class Mundo{
     		for(int j = 0; j < this.getColumnas(); j++){
     			if (!superficie.casillaVacia(i, j) && !movido[i][j]){
     				Casilla casilla = this.superficie.ejecutaMovimiento(i, j);
-    				movido[casilla.getFila()][casilla.getColumna()] = true;
+    				//Si no se puede mover la celula, no se toca la matriz
+    				if (casilla != null){
+    					movido[casilla.getFila()][casilla.getColumna()] = true;
+    				}
     			}
     		}
 		}
@@ -103,31 +107,6 @@ public class Mundo{
 		}
 		return movido;
 	}
-	
-	/**
-	 * Se pasan la posicion de la celula a comprobar si se reproduce, moviendo la celula y creando la nueva celula en la 
-	 * posicion antigua si lo hace, tambien reinicia el contador de pasosReproduccion de la celula
-	 * @param i Entero que representa la fila de la celula a reproducirse
-	 * @param j Entero que representa la columna de la celula a reproducirse
-	 * @param f Entero que representa la fila de la nueva celula creada por la reproduccion
-	 * @param c Entero que representa la columna de la nueva celula creada por la reproduccion
-	 * @return TRUE si se ha reproducido la nueva celula, FALSE si no lo ha hecho
-	 */
-	/*
-	private boolean reproducirse(int i, int j, int f, int c){
-		boolean hecho = false;
-		if (superficie.getReproducir(i,j) < 0){
-			System.out.println("Movimiento de (" + i + "," + j + ") a (" + f + "," + c + ")");
-			superficie.reiniciarReproducir(i, j);
-			superficie.moverCelula (f, c, i, j);
-			this.crearCelulaSuperficie(i,j);
-			System.out.println("Nace nueva celula en (" + i + "," + j + ")" + " cuyo padre ha sido (" + f + "," + c + ")");
-			hecho = true;
-		}
-		return hecho;
-	}
-	*/
-	
 
 	/**
 	 * Metodo que reinicia la matriz del tablero dejando las casillas vacias
@@ -143,9 +122,11 @@ public class Mundo{
 	 * @param celula 
 	 * @return TRUE se ha hecho el proceso de crear la celula
 	 */
+	
 	public boolean crearCelulaSuperficie(int f, int c, Celula celula){ 
 		return superficie.llenarCasilla(f, c, celula);  
 	}
+	
 	
 	/**
 	 * Elimina la celula en la posicion (f,c) de la superficie
@@ -173,8 +154,6 @@ public class Mundo{
 		return this.superficie.getColumnas();
 	}
 	
-	
-	
 	/**
 	 * 
 	 * @return
@@ -187,41 +166,18 @@ public class Mundo{
 	 * Se encarga de guardar las dimensiones del tablero y luego todo el tablero con el estado actual del juego en juego.txt
 	 * @throws IOException
 	 */
-	public void guardar() throws IOException{
-		File archivo=new File("juego.txt");
+	public void guardar(Scanner in) throws IOException{
+		System.out.print("Introduce el nombre del fichero (sin extension) donde guardar el juego: ");
+		String nombre = in.nextLine();
+		File archivo = new File(nombre + ".txt");
 		FileWriter escribir = new FileWriter(archivo);
 		String dim = this.getFilas() + " " + this.getColumnas() + System.getProperty("line.separator");
 		escribir.append(dim);
 		escribir.append(this.toStringBuffer());
 		escribir.close();
+		
 	}
 	
-	/**
-	 * Abre el fichero juego.txt, carga las dimensiones del tablero del fichero y las celulas que habia en un nuevo mundo
-	 * @return El nuevo mundo que hemos cargado del fichero
-	 * @throws IOException
-	 */
-	public Mundo cargar() throws IOException{
-		File archivo=new File("juego.txt");
-		Scanner entrada = new Scanner(archivo);
-		int fila = entrada.nextInt(), columna = entrada.nextInt();
-		Mundo mundo = new Mundo(fila, columna);
-		for (int i=0; i < fila; i++){
-			for (int j=0; j < columna; j++){
-				String cadena = entrada.next();
-				if (!cadena.equals("-")){
-					//Crear nueva celula
-					String [] posicion = cadena.split("-");
-					int SinMover = Integer.parseInt(posicion[0]);
-					int Reproduccion = Integer.parseInt(posicion[1]);
-					//MIRAR QUE TIPO DE CELULA CREO
-					mundo.crearCelulaSuperficie(i, j, new CelulaSimple (SinMover, Reproduccion));
-				}
-			}
-		}
-		entrada.close();
-		return mundo;
-	}
 	
 	/**
 	 * Metodo que valida que los valores de fila y columna que pasa el usuario son validos
@@ -243,6 +199,11 @@ public class Mundo{
 	public void terminaSimulacion() {
 		this.simulacionTerminada = true;
 	}
+	public void cargar(Scanner in) throws IOException {
+		superficie.cargar(in);
+	}
+	
+	
 	
 	
 }

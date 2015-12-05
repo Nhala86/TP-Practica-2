@@ -1,5 +1,7 @@
 package comandos;
 
+import java.util.Scanner;
+
 import logica.Mundo;
 
 public class EliminarCelula implements Comando {
@@ -26,13 +28,12 @@ public class EliminarCelula implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("ELIMINARCELULA (F, C): Elimina la celula de la posicion (f, c)")
-				+ System.getProperty("line.separator");
+		return ("ELIMINARCELULA (F, C): Elimina la celula de la posicion (f, c)" + System.getProperty("line.separator"));
 	}
 	
-	public void ejecuta(Mundo mundo){
+	public void ejecuta(Mundo mundo, Scanner in){
 		if(mundo.eliminarCelulaSuperficie(this.fila, this.columna)){
-			System.out.println("se ha eliminado la celula de la posicion(" + this.fila + "," + this.columna + ")");
+			System.out.println("Se ha eliminado la celula de la posicion(" + this.fila + "," + this.columna + ")");
 		}
 		else System.out.println("No existe la celula en esa posicion");
 	}

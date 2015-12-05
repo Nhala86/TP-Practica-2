@@ -1,12 +1,11 @@
 package comandos;
+import java.io.IOException;
+import java.util.Scanner;
+
 import logica.Mundo;
 
 public class Ayuda implements Comando {
 	
-	public void ejecuta (Mundo mundo){
-		System.out.println(ParserComandos.AyudaComandos());
-	}
-
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;
@@ -18,7 +17,13 @@ public class Ayuda implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("Ayuda: POSIBLES COMANDOS: ") + System.getProperty("line.separator");
+		return ("Ayuda: POSIBLES COMANDOS: " + System.getProperty("line.separator"));
+	}
+
+	@Override
+	public void ejecuta(Mundo mundo, Scanner in) throws IOException {
+		System.out.println(ParserComandos.AyudaComandos());
+		
 	}
 
 }

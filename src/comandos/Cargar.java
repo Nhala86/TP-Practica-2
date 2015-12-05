@@ -1,6 +1,7 @@
 package comandos;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import logica.Mundo;
 
@@ -8,18 +9,12 @@ public class Cargar implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return ("CARGAR: cargar de un fichero de texto una partida guardada") + 
-				System.getProperty("line.separator");
+		return ("CARGAR: cargar de un fichero de texto una partida guardada" + System.getProperty("line.separator"));
 	}
 
 	@Override
-	public void ejecuta(Mundo mundo) {
-		try {
-			mundo = mundo.cargar();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void ejecuta(Mundo mundo, Scanner in) throws IOException {
+		mundo.cargar(in);
 		
 	}
 

@@ -1,6 +1,12 @@
 package logica;
 
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 import celula.Celula;
+import celula.CelulaCompleja;
+import celula.CelulaSimple;
 
 
 
@@ -105,7 +111,6 @@ public class Superficie{
 		return ok;
 	}	
 	
-	
 	/**
 	 * Metodo que devuelve el valor entero positivo de las filas de la Superficie
 	 * @return valor entero positivo de las filas 
@@ -122,46 +127,6 @@ public class Superficie{
 		return this.columnas;
 	}
 	
-	/**
-	 * Metodo que llama a la clase Superficie con unos parametros especificos de fila y columna para decrementar los pasos de reproducción
-	 * @param f entero positivo que hace referencia a la fila 
-	 * @param c entero positivo que hace referencia a la columna
-	 * @return el valor decrementado de pasos de reproducción
-	 */
-	public int decrementarRep(int f, int c){
-		return superficie[f][c].decrementarRep();
-	}
-	
-	/**
-	 * Metodo que llama a la clase Superficie con unos parametros especificos de fila y columna para decrementar los pasos sin mover
-	 * @param f entero positivo que hace referencia a la fila 
-	 * @param c entero positivo que hace referencia a la columna
-	 * @return el valor decrementado de pasos sin mover
-	 */
-	/*
-	public int decrementarSinMover(int f, int c) {
-		return superficie[f][c].decrementarSinMover();		
-	}
-	*/
-	/**
-	 * Metodo que llama a la clase Superficie con unos parametros especificos de fila 
-	 * y columna para indicar los pasos de reproduccion de la celula
-	 * @param f entero positivo que hace referencia a la fila 
-	 * @param c entero positivo que hace referencia a la columna
-	 * @return el valor actual de pasos de reproducción
-	 */
-	public int getReproducir(int f, int c) {
-		return superficie[f][c].getReproducir();
-	}
-	/**
-	 * Metodo que llama a la clase Superficie con unos parametros especificos de fila y columna para decrementar los pasos sin mover
-	 * @param f entero positivo que hace referencia a la fila 
-	 * @param c entero positivo que hace referencia a la columna
-	 * @return el valor actual de pasos sin mover
-	 */
-	public int getSinMover(int f, int c) {
-		return superficie[f][c].getSinMover();
-	}
 	
 	/**
 	 * Metodo que llama a la clase Superficie e iguala la posicion actual
@@ -187,14 +152,58 @@ public class Superficie{
 	}
 	
 	/**
-	 * Reinicia el valor de reproducir a la constante
-	 * @param f valor entero positivo que indica la fila de la celula
-	 * @param c valor entero positivo que indica la columna de la celula
+	 * Abre el fichero juego.txt, carga las dimensiones del tablero del fichero y las celulas que habia en un nuevo mundo
+	 * @return 
+	 * @return El nuevo mundo que hemos cargado del fichero
+	 * @throws IOException
 	 */
-	/*
-	public void reiniciarReproducir(int f, int c){
-		this.superficie[f][c].reiniciarReproducir(); 
+	public void cargar(Scanner in) throws IOException{
+		//Scanner scanner = new Scanner(System.in);
+		System.out.print("Introduce el nombre del fichero (sin extension) para el juego: ");
+		//String nombre = scanner.nextLine();
+		//scanner.close();
+		String nombre = in.nextLine();
+		File archivo = new File(nombre + ".txt");
+		if (archivo.canRead()){
+			Scanner entrada = new Scanner(archivo);
+			int fila = entrada.nextInt(), columna = entrada.nextInt();
+			//Mundo mundo = new Mundo(fila, columna);
+			if (this.filas == fila && this.columnas == columna){
+				for (int i=0; i < fila; i++){
+					for (int j=0; j < columna; j++){
+						String cadena = entrada.next();
+						if (!cadena.equals("-")){
+							//Crear nueva celula
+							String [] posicion = cadena.split("-");
+							if (posicion.length == 1){
+								int explota = Integer.parseInt(cadena);
+								this.superficie[i][j] = new CelulaCompleja(explota);
+							}
+							else{
+								int SinMover = Integer.parseInt(posicion[0]);
+								int Reproduccion = Integer.parseInt(posicion[1]);
+								this.superficie[i][j] = new CelulaSimple (SinMover, Reproduccion);
+							}
+						}
+						else {
+							vaciarCasilla(i, j);
+						}
+					}
+				}
+			}
+			else {
+				System.out.println("La dimension del tablero del juego a cargar no es correcta, ajuste la dimension y vuelva a intentarlo");
+			}
+			entrada.close();
+			System.out.println("Partida cargada correctamente");
+		}
+		else {
+			System.out.println("El nombre del fichero especificado no existe");
+		}
 	}
-	*/
 }
+	
+
+	
+
 

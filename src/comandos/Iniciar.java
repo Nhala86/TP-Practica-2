@@ -1,10 +1,13 @@
 package comandos;
+import java.util.Scanner;
+
 import logica.Mundo;
 
 public class Iniciar implements Comando {
 	
-	public void ejecuta(Mundo mundo){
+	public void ejecuta(Mundo mundo, Scanner in){
 		mundo.generarCelulas();
+		System.out.println("Iniciando el mundo");
 	}
 
 	@Override
@@ -17,7 +20,7 @@ public class Iniciar implements Comando {
 
 	@Override
 	public String textoAyuda() {
-		return "INICIAR : Inicia las celulas aleatoriamente" + System.getProperty("line.separator"); 
+		return ("INICIAR : Inicia las celulas aleatoriamente" + System.getProperty("line.separator")); 
 	}
 
 }

@@ -19,14 +19,15 @@ public final class ParserComandos {
 	 * 
 	 * @return
 	 */
-	public static String AyudaComandos(){
+	//Uso Object en vez de String porque es lo mas logico para devolver el Buffer, no tener que hacer un toString inutil
+	public static Object AyudaComandos(){
 		StringBuffer buffer = new StringBuffer();
 		insertarSeparador(buffer);
 		for(int j = 0; j < comandos.length; j++){
 			buffer.append(comandos[j].textoAyuda());
 		}
 		insertarSeparador(buffer);
-		return buffer.toString();
+		return buffer;
 	}
 	
 	/**

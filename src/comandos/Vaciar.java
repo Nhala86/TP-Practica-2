@@ -1,4 +1,6 @@
 package comandos;
+import java.util.Scanner;
+
 import logica.Mundo;
 
 public class Vaciar implements Comando {
@@ -14,11 +16,12 @@ public class Vaciar implements Comando {
 
 	@Override
 	public String textoAyuda() {		
-		return ("VACIAR: Elimina las celulas del mundo") + System.getProperty("line.separator");
+		return ("VACIAR: Elimina las celulas del mundo" + System.getProperty("line.separator"));
 	}
 	
-	public void ejecuta(Mundo mundo){
+	public void ejecuta(Mundo mundo, Scanner in){
 		mundo.vaciar();
+		System.out.println("Vaciando el tablero de celulas");
 	}
 
 }

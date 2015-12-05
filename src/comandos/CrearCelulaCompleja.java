@@ -1,5 +1,6 @@
 package comandos;
 
+import java.util.Scanner;
 import celula.CelulaCompleja;
 import logica.Mundo;
 
@@ -13,10 +14,10 @@ public class CrearCelulaCompleja  implements Comando{
 	}
 	
 	@Override
-	public void ejecuta(Mundo mundo) {
+	public void ejecuta(Mundo mundo, Scanner in){
 		if(mundo.validarDatos(this.fila, this.columna)){
 			if (mundo.crearCelulaSuperficie(this.fila, this.columna, new CelulaCompleja())){
-				System.out.print("Creamos la celula en: (");
+				System.out.print("Creamos la celula compleja en: (");
 				System.out.print(this.fila);  System.out.print(",");
 				System.out.print(this.columna);  System.out.println(")");
 			}
@@ -44,8 +45,8 @@ public class CrearCelulaCompleja  implements Comando{
 
 	@Override
 	public String textoAyuda() {
-		return ("CREARCELULACOMPLEJA F C: crea una nueva celula compleja en la posicion (f,c) si es posible") 
-				+ System.getProperty("line.separator");
+		return ("CREARCELULACOMPLEJA F C: crea una nueva celula compleja en la posicion (f,c) si es posible" + System.getProperty("line.separator"));
 	}
+
 
 }
