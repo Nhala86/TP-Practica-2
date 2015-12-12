@@ -13,9 +13,8 @@ public class Cargar implements Comando {
 	}
 
 	@Override
-	public void ejecuta(Mundo mundo, Scanner in) throws IOException {
-		mundo.cargar(in);
-		
+	public String ejecuta(Mundo mundo, Scanner in) throws IOException {
+		return "Introduce el nombre del fichero (sin extension) para el juego: " + mundo.cargar(in);
 	}
 
 	@Override

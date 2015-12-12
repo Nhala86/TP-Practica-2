@@ -21,8 +21,8 @@ public class Ayuda implements Comando {
 	}
 
 	@Override
-	public void ejecuta(Mundo mundo, Scanner in) throws IOException {
-		System.out.println(ParserComandos.AyudaComandos());
+	public String ejecuta(Mundo mundo, Scanner in) throws IOException {
+		return ParserComandos.AyudaComandos();
 		
 	}
 

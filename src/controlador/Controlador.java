@@ -10,14 +10,12 @@ import comandos.Comando;
 import comandos.ParserComandos;
 
 
-//OPCIONAL: HACER MENSAJES SOLO EN EL CONTROLADOR, TODO AQUI
-
 public class Controlador {
 	private Mundo mundo;
 	private Scanner in;
 	
 	/**
-	 * Metodo que inicializa el mundo y el scanner
+	 * Metodo constructor que inicializa el mundo y el scanner
 	 */
 	public Controlador(){
 		this.mundo = new Mundo();
@@ -51,6 +49,11 @@ public class Controlador {
 		return valido;
 	}
     
+	/**
+	 * Metodo que lee lo que el usuario mete por consola e impide que no sea el comando correcto
+	 * @param in le pasa los controles inicializados
+	 * @return un string del comando correcto
+	 */
     private String[] crearComando(Scanner in){
     	String[] palabras = null;
     	System.out.println(mundo.toStringBuffer());
@@ -71,29 +74,25 @@ public class Controlador {
     /**
      * Metodo encargado de los controles que el usuario introduce para el funcionamiento del juego
      * y encargado de llamar a las funciones en otras clases para mostrar por pantalla el juego y sus movimientos
-     * @throws IOException 
+     * @throws IOException para evitar los errores del cargado y el guardado
      */
 
 	public void realizaSimulacion() throws IOException{
-		System.out.println("Bienvenido al juego de la vida: ");      
+		System.out.println("Bienvenido al juego de la vida: ");
+		String mensaje;
 		while (!mundo.getSimulacionTerminada()){
 			String [] palabras = crearComando(this.in);			
 			Comando comando = ParserComandos.parseaComando(palabras);
 
 			if (comando != null){
-				comando.ejecuta(this.mundo, this.in);
+				mensaje = comando.ejecuta(this.mundo, this.in);
+				System.out.println(mensaje);
 			}
 			else {
 				System.out.println("Comando desconocido (Escriba AYUDA para infomarse de los comandos disponibles)");
 			}
-		}		
-
-		
-			
-
+		}	
 	}
-
-
 }
 		
 		

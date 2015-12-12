@@ -19,9 +19,10 @@ public class Vaciar implements Comando {
 		return ("VACIAR: Elimina las celulas del mundo" + System.getProperty("line.separator"));
 	}
 	
-	public void ejecuta(Mundo mundo, Scanner in){
+	@Override
+	public String ejecuta(Mundo mundo, Scanner in){
 		mundo.vaciar();
-		System.out.println("Vaciando el tablero de celulas");
+		return "Vaciando el tablero de celulas" + System.getProperty("line.separator");
 	}
 
 }

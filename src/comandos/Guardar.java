@@ -13,9 +13,9 @@ public class Guardar implements Comando {
 	}
 
 	@Override
-	public void ejecuta(Mundo mundo, Scanner in) throws IOException{
-		mundo.guardar(in);
-		System.out.println("Partida guardada correctamente");
+	public String ejecuta(Mundo mundo, Scanner in) throws IOException{
+		return "Introduce el nombre del fichero (sin extension) donde guardar el juego: "
+				+ mundo.guardar(in);
 	}
 
 	@Override

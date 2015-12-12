@@ -4,6 +4,7 @@ package logica;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+
 import celula.Celula;
 import celula.CelulaCompleja;
 import celula.CelulaSimple;
@@ -45,8 +46,7 @@ public class Superficie{
     		matriz.append(System.getProperty("line.separator"));
 		}
 		return matriz;
-	}
-		
+	}		
 	
 	/**
 	 * Busco las posiciones vacias que hay alrededor de la celula, las guarda en un array de tipo casilla y elijo aleatoriamente
@@ -55,7 +55,7 @@ public class Superficie{
 	 * @param c Entero que representa la columna de la celula
 	 * @return posicion en el que se encuentra la casilla seleccionada aleatoriamente
 	 */
-	public Casilla ejecutaMovimiento(int f, int c){
+	public CasillaMensaje ejecutaMovimiento(int f, int c){
 		return superficie[f][c].ejecutaMovimiento(f,c, this);
 		
 	}
@@ -102,6 +102,13 @@ public class Superficie{
 	* @param c valor entero positivo acotado en un rango valido del numero de columnas
 	* @return TRUE si lleno la casilla. FALSE para el caso contrario
 	*/
+	/**
+	 * Metodo que genera una celula nueva si la casilla esta vacia
+	 * @param f valor entero positivo acotado en un rango valido del numero de filas
+	 * @param c valor entero positivo acotado en un rango valido del numero de columnas
+	 * @param celula le pasa una celula de la clase Celula
+	 * @return true si la casilla esta llena y false si esta vacia
+	 */
 	public boolean llenarCasilla(int f, int c, Celula celula){
 		boolean ok = false;
 		if(casillaVacia(f, c)){
@@ -125,8 +132,7 @@ public class Superficie{
 	 */
 	public int getColumnas(){
 		return this.columnas;
-	}
-	
+	}	
 	
 	/**
 	 * Metodo que llama a la clase Superficie e iguala la posicion actual
@@ -138,11 +144,11 @@ public class Superficie{
 	 */
 	public void moverCelula(int f, int c, int i, int j){
 		this.superficie[f][c] = this.superficie[i][j];
-		this.superficie[i][j] = null;
-		
+		this.superficie[i][j] = null;		
 	}
+	
 	/**
-	 * 
+	 * Metodo booleano que llama a esComestible de la Superficie
 	 * @param i entero positivo que hace referencia a la fila nueva 
 	 * @param j entero positivo que hace referencia a la columna nueva
 	 * @return Si es comestible la celula
@@ -153,16 +159,15 @@ public class Superficie{
 	
 	/**
 	 * Abre el fichero juego.txt, carga las dimensiones del tablero del fichero y las celulas que habia en un nuevo mundo
-	 * @return 
+	 * @param in pasa los controles ya inicializados
 	 * @return El nuevo mundo que hemos cargado del fichero
-	 * @throws IOException
+	 * @throws IOException para evitar errores de cargado y guardado
 	 */
-	public void cargar(Scanner in) throws IOException{
+	public String cargar(Scanner in) throws IOException{
 		//Scanner scanner = new Scanner(System.in);
-		System.out.print("Introduce el nombre del fichero (sin extension) para el juego: ");
 		//String nombre = scanner.nextLine();
 		//scanner.close();
-		String nombre = in.nextLine();
+		String nombre = in.nextLine(), mensaje;
 		File archivo = new File(nombre + ".txt");
 		if (archivo.canRead()){
 			Scanner entrada = new Scanner(archivo);
@@ -192,15 +197,18 @@ public class Superficie{
 				}
 			}
 			else {
-				System.out.println("La dimension del tablero del juego a cargar no es correcta, ajuste la dimension y vuelva a intentarlo");
+				mensaje = "La dimension del tablero del juego a cargar no es correcta, ajuste la dimension y vuelva a intentarlo"
+						+ System.getProperty("line.separator");
 			}
 			entrada.close();
-			System.out.println("Partida cargada correctamente");
+			mensaje = "Partida cargada correctamente" + System.getProperty("line.separator");
 		}
 		else {
-			System.out.println("El nombre del fichero especificado no existe");
+			mensaje = "El nombre del fichero especificado no existe" + System.getProperty("line.separator");
 		}
+		return mensaje;
 	}
+	
 }
 	
 

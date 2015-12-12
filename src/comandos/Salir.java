@@ -5,9 +5,6 @@ import logica.Mundo;
 
 public class Salir implements Comando {
 
-	/**
-	 * 
-	 */
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;
@@ -17,21 +14,15 @@ public class Salir implements Comando {
 		return comando;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public String textoAyuda() {
 		return ("SALIR: Es una instruccion que nos saca de la simulación" + System.getProperty("line.separator"));
 	}
- /**
-  * 
-  */
+ 
 	@Override
-
-	public void ejecuta(Mundo mundo, Scanner in){
+	public String ejecuta(Mundo mundo, Scanner in){
 		mundo.terminaSimulacion();
-
+		return null;
 	}
 
 }

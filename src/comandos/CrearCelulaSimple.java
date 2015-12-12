@@ -9,27 +9,35 @@ public class CrearCelulaSimple implements Comando {
 	private int fila;
 	private int columna;
 	
+	/**
+	 * Metodo constructor de argumentos
+	 * @param fila valor entero positivo de fila
+	 * @param columna valor entero positivo de columna
+	 */
 	public CrearCelulaSimple(int fila, int columna){
 		this.fila = fila;
 		this.columna = columna;
 	}
 	
 	@Override
-	public void ejecuta(Mundo mundo, Scanner in){
+	public String ejecuta(Mundo mundo, Scanner in){
+		String mensaje;
 		if(mundo.validarDatos(this.fila, this.columna)){
 			if (mundo.crearCelulaSuperficie(this.fila, this.columna, new CelulaSimple())){
-				System.out.print("Creamos la celula simple en: (");
-				System.out.print(this.fila);  System.out.print(",");
-				System.out.print(this.columna);  System.out.println(")");
+				mensaje = "Creamos la celula simple en: (" + this.fila + "," + 
+						this.columna + ")";
 			}
 			else {
-				System.out.println("Error, la posicion indicada esta ocupada");
+				mensaje = "Error, la posicion indicada esta ocupada" + System.getProperty("line.separator");
 			}
 		}
 		else {
-			System.out.println("Los parametros pasados son incorrectos, la celula no existe. Vuelva a introducirlos");
+			mensaje = "Los parametros pasados son incorrectos, la celula no existe. Vuelva a introducirlos" 
+					+ System.getProperty("line.separator");
 		}
+		return mensaje;
 	}
+	
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;

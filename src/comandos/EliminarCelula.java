@@ -7,13 +7,17 @@ import logica.Mundo;
 public class EliminarCelula implements Comando {
 	private int fila;
 	private int columna;
-	
-	
-	
+		
+	/**
+	 * Metodo constructor de argumentos
+	 * @param fila valor entero positivo de fila
+	 * @param columna valor entero positivo de columna
+	 */
 	public EliminarCelula(int fila, int columna){
 		this.fila = fila;
 		this.columna = columna;
 	}
+	
 	@Override
 	public Comando parsea(String[] palabras) {
 		Comando comando;
@@ -31,10 +35,11 @@ public class EliminarCelula implements Comando {
 		return ("ELIMINARCELULA (F, C): Elimina la celula de la posicion (f, c)" + System.getProperty("line.separator"));
 	}
 	
-	public void ejecuta(Mundo mundo, Scanner in){
+	@Override
+	public String ejecuta(Mundo mundo, Scanner in){
 		if(mundo.eliminarCelulaSuperficie(this.fila, this.columna)){
-			System.out.println("Se ha eliminado la celula de la posicion(" + this.fila + "," + this.columna + ")");
+			return "Se ha eliminado la celula de la posicion(" + this.fila + "," + this.columna + ")" + System.getProperty("line.separator");
 		}
-		else System.out.println("No existe la celula en esa posicion");
+		else return "No existe la celula en esa posicion" + System.getProperty("line.separator");
 	}
 }

@@ -16,34 +16,34 @@ public final class ParserComandos {
 	};
 	
 	/**
-	 * 
-	 * @return
-	 */
-	//Uso Object en vez de String porque es lo mas logico para devolver el Buffer, no tener que hacer un toString inutil
-	public static Object AyudaComandos(){
-		StringBuffer buffer = new StringBuffer();
-		insertarSeparador(buffer);
+	 * Metodo que devuelve los mensajes de los comandos
+	 * @return un string por pantalla
+	 */	 
+	public static String AyudaComandos(){
+		String mensaje = insertarSeparador();
 		for(int j = 0; j < comandos.length; j++){
-			buffer.append(comandos[j].textoAyuda());
+			mensaje += (comandos[j].textoAyuda());
 		}
-		insertarSeparador(buffer);
-		return buffer;
+		mensaje += insertarSeparador();
+		return mensaje;
 	}
 	
 	/**
 	 * Metodo que genera una cadena de guiones como separador.
 	 * @param buffer de 70 caracteres '_'
 	 */
-	private static void insertarSeparador(StringBuffer buffer){
-		for(int i = 0; i < 70; i++)
-			buffer.append('_');		
-		buffer.append('\n');
+	private static String insertarSeparador(){
+		String mensaje = "";
+		for(int i = 0; i < 70; i++){
+			mensaje += "_";		
+		}
+		return mensaje + System.getProperty("line.separator");
 	}
 	
 	/**
-	 * 
-	 * @param palabras
-	 * @return
+	 * Metodo que compara la longitud de las palabras metidas por consola por el usuario
+	 * @param palabras array de palabras
+	 * @return el comando que el usuario a solicitado
 	 */
 	public static Comando parseaComando(String[] palabras){
 		int i = 0;

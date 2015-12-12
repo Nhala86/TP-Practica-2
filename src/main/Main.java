@@ -13,7 +13,7 @@ public class Main {
 	/**
 	 * Metodo constructor del Main, que inicializa Scanner, Mundo y Controlador, y realiza la simulacion del juego
 	 * @param args valor predeterminado por java
-	 * @throws IOException 
+	 * @throws IOException para evitar errores en el guardado y el cargado
 	 */
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);

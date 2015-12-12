@@ -1,11 +1,29 @@
 package celula;
 
-import logica.Casilla;
+
+import logica.CasillaMensaje;
 import logica.Superficie;
 
-abstract public class Celula {
+public interface Celula {
 	
-	public abstract Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
-	public abstract boolean esComestible();
-	public abstract Object toStringBuffer();
+	/**
+	 * Metodo que llama a la clase CasillaMensaje para poder evolucionar las celulas
+	 * @param f valor entero positivo de fila
+	 * @param c valor entero positivo de columna
+	 * @param superficie pasado para realizar el paso en la superficie
+	 * @return las celulas evolucionadas cuando se realiza el comando "Paso"
+	 */
+	CasillaMensaje ejecutaMovimiento(int f, int c, Superficie superficie);
+	
+	/**
+	 * Metodo booleano que dice que una celula es comestible o no, diferenciando entre celulas
+	 * @return true si es la celula simple, ya que es comestible. Y false si es la celula compleja
+	 */
+	boolean esComestible();
+	
+	/**
+	 * Metodo que devuelve la matriz con casillas llenas con celulas y casillas vacias aleatoriamente
+	 * @return la matriz con las celulas simples y complejas
+	 */
+	Object toStringBuffer();
 }

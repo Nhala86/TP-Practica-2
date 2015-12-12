@@ -20,8 +20,9 @@ public class Paso implements Comando {
 		return ("PASO: mueve las celulas de lugar en el mundo" + System.getProperty("line.separator"));
 	}
 	
-	public void ejecuta(Mundo mundo, Scanner in){
-		mundo.evoluciona();
+	@Override
+	public String ejecuta(Mundo mundo, Scanner in){
+		return mundo.evoluciona();
 	}
 
 }

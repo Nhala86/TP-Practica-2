@@ -5,9 +5,11 @@ import logica.Mundo;
 
 public class Iniciar implements Comando {
 	
-	public void ejecuta(Mundo mundo, Scanner in){
+	@Override
+	public String ejecuta(Mundo mundo, Scanner in){
+		mundo.vaciar();
 		mundo.generarCelulas();
-		System.out.println("Iniciando el mundo");
+		return "Iniciando el mundo" + System.getProperty("line.separator");
 	}
 
 	@Override
