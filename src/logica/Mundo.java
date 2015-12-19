@@ -79,7 +79,7 @@ public class Mundo{
 	 * @return el paso de las celulas
 	 */
 	public String evoluciona(){
-		String mensaje = null;
+		String mensaje = "";
 		boolean movido[][] = matriz();
 		for(int i = 0; i < this.getFilas(); i++){
     		for(int j = 0; j < this.getColumnas(); j++){

@@ -22,7 +22,7 @@ public class Salir implements Comando {
 	@Override
 	public String ejecuta(Mundo mundo, Scanner in){
 		mundo.terminaSimulacion();
-		return null;
+		return "Juego finalizado";
 	}
 
 }
